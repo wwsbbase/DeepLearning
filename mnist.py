@@ -2,6 +2,12 @@ import numpy as np
 import tensorflow as tf
 from tensorflow.examples.tutorials.mnist import input_data
 from matplotlib import pyplot as plt
+
+
+import ptvsd
+ptvsd.settrace(None, ('0.0.0.0', 18110))
+
+ptvsd.wait_for_attach()
 #%matplotlib inline
 
 tf.logging.set_verbosity(tf.logging.INFO)
