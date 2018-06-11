@@ -77,7 +77,12 @@ logits = logits_2
 #tf.reduce_mean 求平均值
 
 cross_entropy_loss = tf.reduce_mean(
-    tf.nn.sparse_softmax_cross_entropy_with_logits(logits=logits, labels=y))
+    tf.nn.sparse_softmax_cross_entropy_with_logits(logits=logits, labels=y)
+    # + 0.01*tf.nn.l2_loss(W_1)
+    # + 0.01*tf.nn.l2_loss(b_1)
+    # + 0.01*tf.nn.l2_loss(W_2)
+    # + 0.01*tf.nn.l2_loss(b_2)
+    )
 
 optimizer = tf.train.GradientDescentOptimizer(
     learning_rate=learning_rate).minimize(cross_entropy_loss)
