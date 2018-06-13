@@ -32,6 +32,7 @@ function Ubuntu()
 	sudo apt-get install -y  wget
 	sudo apt-get install -y  unzip
 	sudo apt-get install -y  gcc
+	sudo apt-get install -y  dstat
 
 	############## Vim ################
 	# get latest vim src code 

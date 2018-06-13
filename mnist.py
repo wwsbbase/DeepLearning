@@ -7,7 +7,7 @@
 import numpy as np
 import tensorflow as tf
 from tensorflow.examples.tutorials.mnist import input_data
-from matplotlib import pyplot as plt
+# from matplotlib import pyplot as plt
 
 #%matplotlib inline
 tf.logging.set_verbosity(tf.logging.INFO)
