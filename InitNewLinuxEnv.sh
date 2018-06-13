@@ -18,29 +18,34 @@ function CentOS()
 
 function Ubuntu()
 {
-
+	# base lib
 	sudo apt-get -y install git
 	sudo apt-get -y install screen
 	sudo apt-get -y install ctags
-	
+	sudo apt-get -y install python-dev
 	sudo apt-get -y install libncurses5-dev
 
-
+	# get latest vim src code 
 	git clone https://github.com/vim/vim.git
 	cd vim
 	git pull
 	
-	
+	# clean 
 	make distclean  # if you build Vim before
 	
 	# get python path
 	python_lib_path="/usr/lib64/python2.7/config/"
 	
+	# install
 	./configure --with-features=huge --enable-pythoninterp=yes --enable-rubyinterp=yes --enable-luainterp=yes --enable-perlinterp=yes --with-python-config-dir=$python_lib_path --enable-gui=gtk2 --enable-cscope --prefix=/usr/local
 	
 	make
 	sudo make install
-	
+
+	# config
+	git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+
+	wget XXX
 
 }
 
