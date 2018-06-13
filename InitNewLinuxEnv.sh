@@ -6,25 +6,34 @@
 
 function CentOS()
 {
-	yum install git
-	yum -y install screen
-	apt-get -y install ctags
-	
-	yum install ncurses
-	yum install ncurses-libs
-	yum install ncurses-devel
+	yum install -y git
+	yum install -y screen
+	yum install -y ctags
+	yum install -y ncurses
+	yum install -y ncurses-libs
+	yum install -y ncurses-devel
 
 }
 
 function Ubuntu()
 {
-	# base lib
-	sudo apt-get -y install git
-	sudo apt-get -y install screen
-	sudo apt-get -y install ctags
-	sudo apt-get -y install python-dev
-	sudo apt-get -y install libncurses5-dev
+	########## Base Setting ###########
+	# set host name
+	sudo hostnamectl set-hostname wwsbbase_cd
+	# set PS1
+	echo "export PS1='\n\e[1;37m[\e[m\e[1;34m\u\e[m\e[1;37m@\e[m\e[1;31m\H\e[m \e[4m`pwd`\e[m\e[1;37m]\e[m\e[1;36m\e[m\n\$'" >> $HOME/.bashrc
 
+	# install base tools
+	sudo apt-get install -y  git
+	sudo apt-get install -y  screen
+	sudo apt-get install -y  ctags
+	sudo apt-get install -y  python-dev
+	sudo apt-get install -y  libncurses5-dev
+	sudo apt-get install -y  wget
+	sudo apt-get install -y  unzip
+	sudo apt-get install -y  gcc
+
+	############## Vim ################
 	# get latest vim src code 
 	git clone https://github.com/vim/vim.git
 	cd vim
@@ -45,7 +54,9 @@ function Ubuntu()
 	# config
 	git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 
-	wget XXX
+	wget https://codeload.github.com/wwsbbase/vimrc_settings/zip/master
+
+	unzip master && cd vimrc_settings-master && cp vimrc $HOME/.vimrc
 
 }
 
