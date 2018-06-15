@@ -20,6 +20,7 @@ function Ubuntu()
 	########## Base Setting ###########
 	# set host name
 	sudo hostnamectl set-hostname wwsbbase_cd
+	sudo echo "127.0.0.1   wwsbbase_cd" >> /etc/hosts
 	# set PS1
 	echo "export PS1='\n\e[1;37m[\e[m\e[1;34m\u\e[m\e[1;37m@\e[m\e[1;31m\H\e[m \e[4m`pwd`\e[m\e[1;37m]\e[m\e[1;36m\e[m\n\$'" >> $HOME/.bashrc
 
@@ -27,19 +28,28 @@ function Ubuntu()
 	sudo apt-get install -y  git
 	sudo apt-get install -y  screen
 	sudo apt-get install -y  ctags
+	sudo apt-get install -y  lua5.1
+	sudo apt-get install -y  lua5.1-dev
 	sudo apt-get install -y  python-dev
+	sudo apt-get install -y  python3-dev
 	sudo apt-get install -y  libncurses5-dev
 	sudo apt-get install -y  wget
 	sudo apt-get install -y  unzip
 	sudo apt-get install -y  gcc
+	sudo apt-get install -y  cmake
+	sudo apt-get install -y  build-essential
 	sudo apt-get install -y  dstat
 
 	############## Vim ################
 	# get latest vim src code 
 	git clone https://github.com/vim/vim.git
+	InstallVim
+}
+
+function InstallVim()
+{
 	cd vim
 	git pull
-	
 	# clean 
 	make distclean  # if you build Vim before
 	
@@ -58,7 +68,6 @@ function Ubuntu()
 	wget https://codeload.github.com/wwsbbase/vimrc_settings/zip/master
 
 	unzip master && cd vimrc_settings-master && cp vimrc $HOME/.vimrc
-
 }
 
 function Debian()
@@ -72,7 +81,7 @@ echo '----------------------------------'
 echo '请选择系统:'
 echo "1) CentOS 7 X64"
 echo "2) Ubuntu 14+ X64"
-echo "3) Debian 8+ X64"
+echo "3) InstallVim "
 echo "q) 退出"
 echo '----------------------------------'
 read -p ":" num
@@ -93,10 +102,7 @@ case $num in
 		exit
 	;;
 	3)
-		Debian
-		#setting $osip
-		#echo "温馨提示：Debian/Ubuntu用户若无法访问，需要放行 6080/6800/51413 端口或关闭防火墙！"
-		#echo '----------------------------------'
+		InstallVim
 		exit
 	;;
 	q)
