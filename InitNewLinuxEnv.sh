@@ -26,28 +26,35 @@ function Ubuntu()
 
 	# install base tools
 	sudo apt-get install -y  git
+	sudo apt-get install -y  wget
+	sudo apt-get install -y  unzip
 	sudo apt-get install -y  screen
+	sudo apt-get install -y  dstat
+
+	# install for building Vim
 	sudo apt-get install -y  ctags
 	sudo apt-get install -y  lua5.1
 	sudo apt-get install -y  lua5.1-dev
 	sudo apt-get install -y  python-dev
 	sudo apt-get install -y  python3-dev
 	sudo apt-get install -y  libncurses5-dev
-	sudo apt-get install -y  wget
-	sudo apt-get install -y  unzip
+
 	sudo apt-get install -y  gcc
 	sudo apt-get install -y  cmake
 	sudo apt-get install -y  build-essential
-	sudo apt-get install -y  dstat
+
+	# install for build YCM
+	sudo apt-get install -y  clang-5.0
 
 	############## Vim ################
-	# get latest vim src code 
-	git clone https://github.com/vim/vim.git
 	InstallVim
 }
 
 function InstallVim()
 {
+	# get latest vim src code 
+	git clone https://github.com/vim/vim.git
+
 	cd vim
 	git pull
 	# clean 
@@ -65,9 +72,22 @@ function InstallVim()
 	# config
 	git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 
+	# get vimrc
 	wget https://codeload.github.com/wwsbbase/vimrc_settings/zip/master
 
 	unzip master && cd vimrc_settings-master && cp vimrc $HOME/.vimrc
+}
+
+function InstallSSR()
+{
+	git clone https://github.com/SAMZONG/gfwlist2privoxy.git
+	cd gfwlist2privoxy/
+	mv ssr /usr/local/bin
+	chmod +x /usr/local/bin/ssr
+	ssr install
+	cd vimrc_settings-master && cp vimrc $HOME/.vimrc
+
+	ssr start
 }
 
 function Debian()
