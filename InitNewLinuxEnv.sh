@@ -3,27 +3,23 @@
 #####		Author:bopy				#####
 #####		Update:2018-06-13		#####
 
-
-function CentOS()
+function BaseSetting()
 {
-	yum install -y git
-	yum install -y screen
-	yum install -y ctags
-	yum install -y ncurses
-	yum install -y ncurses-libs
-	yum install -y ncurses-devel
+	############# Add User ############
+	#sudo adduser bopy
+	#sudo passwd bopy
+	#sudo visudo
 
-}
-
-function Ubuntu()
-{
 	########## Base Setting ###########
 	# set host name
-	sudo hostnamectl set-hostname wwsbbase_cd
-	sudo echo "127.0.0.1   wwsbbase_cd" >> /etc/hosts
+	sudo hostnamectl set-hostname wwsbbase_Raspberry
+	sudo echo "127.0.1.1   wwsbbase_Raspberry" >> /etc/hosts
 	# set PS1
-	echo "export PS1='\n\e[1;37m[\e[m\e[1;34m\u\e[m\e[1;37m@\e[m\e[1;31m\H\e[m \e[4m`pwd`\e[m\e[1;37m]\e[m\e[1;36m\e[m\n\$'" >> $HOME/.bashrc
+	sudo echo "export PS1='\n\e[1;37m[\e[m\e[1;34m\u\e[m\e[1;37m@\e[m\e[1;31m\H\e[m \e[4m`pwd`\e[m\e[1;37m]\e[m\e[1;36m\e[m\n\$'" >> $HOME/.bashrc
+}
 
+function InstallTools()
+{
 	# install base tools
 	sudo apt-get install -y  git
 	sudo apt-get install -y  wget
@@ -45,12 +41,9 @@ function Ubuntu()
 
 	# install for build YCM
 	sudo apt-get install -y  clang-5.0
-
-	############## Vim ################
-	InstallVim
 }
 
-function InstallVim()
+function BuildVim()
 {
 	# get latest vim src code 
 	git clone https://github.com/vim/vim.git
@@ -90,9 +83,45 @@ function InstallSSR()
 	ssr start
 }
 
+function Ubuntu()
+{
+	########## Setting ###########
+	BaseSetting
+	InstallTools
+	############## Vim ################
+	BuildVim
+}
+
 function Debian()
 {
-	echo "Debian"
+	########## Setting ###########
+	#BaseSetting
+	InstallTools
+	############## Vim ################
+	#BuildVim
+
+}
+
+function Raspberry()
+{
+	########## Setting ###########
+	#BaseSetting
+	InstallTools
+	#SSR
+	InstallSSR
+	############## Vim ################
+	#BuildVim
+}
+
+function CentOS()
+{
+	yum install -y git
+	yum install -y screen
+	yum install -y ctags
+	yum install -y ncurses
+	yum install -y ncurses-libs
+	yum install -y ncurses-devel
+
 }
 
 
@@ -101,7 +130,7 @@ echo '----------------------------------'
 echo '请选择系统:'
 echo "1) CentOS 7 X64"
 echo "2) Ubuntu 14+ X64"
-echo "3) InstallVim "
+echo "3) Raspberry "
 echo "q) 退出"
 echo '----------------------------------'
 read -p ":" num
@@ -122,7 +151,7 @@ case $num in
 		exit
 	;;
 	3)
-		InstallVim
+		Raspberry
 		exit
 	;;
 	q)
