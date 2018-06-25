@@ -49,6 +49,9 @@ function InstallTools()
 	sudo apt-get install -y  screen
 	sudo apt-get install -y  dstat
 
+	# file system
+	sudo apt-get install -y  xfsprogs
+
 	# install for building Vim
 	sudo apt-get install -y  ctags
 	sudo apt-get install -y  lua5.1
